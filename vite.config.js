@@ -36,6 +36,18 @@ export default defineConfig({
             purpose: "any",
           },
         ],
+        screenshots: [
+          {
+            src: "/digimenu-scanntek-com-1280x720desktop-625937.png",
+            sizes: "1280x720",
+            type: "image/png",
+          },
+          {
+            src: "/digimenu-scanntek-com-720x1280desktop-625937.png",
+            sizes: "720x1280",
+            type: "image/png",
+          },
+        ],
       },
       devOptions: {
         enabled: true,
