@@ -47,6 +47,11 @@ export default defineConfig({
             sizes: "720x1280",
             type: "image/png",
           },
+          {
+            src: "/screenshot-1920x1080.png",
+            sizes: "1920x1080",
+            type: "image/png",
+          },
         ],
       },
       devOptions: {
