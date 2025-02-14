@@ -3,14 +3,20 @@ import react from "@vitejs/plugin-react";
 import { VitePWA } from "vite-plugin-pwa";
 
 export default defineConfig({
+  server: {
+    mimeTypes: {
+      webmanifest: "application/manifest+json",
+      png: "image/png",
+    },
+  },
   plugins: [
     react(),
     VitePWA({
       registerType: "autoUpdate", // Auto update the service worker
       manifest: {
-        name: "My PWA App",
-        short_name: "PWA App",
-        description: "A Vite PWA Application",
+        name: "iChef Reports App",
+        short_name: "iChef",
+        description: "A modern reporting web app",
         theme_color: "#ffffff",
         background_color: "#ffffff",
         display: "standalone",
@@ -29,21 +35,15 @@ export default defineConfig({
             type: "image/png",
             purpose: "any",
           },
-          {
-            src: "/pwa-144x144.png",
-            sizes: "144x144",
-            type: "image/png",
-            purpose: "any",
-          },
         ],
         screenshots: [
           {
-            src: "/digimenu-scanntek-com-1280x720desktop-625937.png",
+            src: "/screenshot-1280x720.png",
             sizes: "1280x720",
             type: "image/png",
           },
           {
-            src: "/digimenu-scanntek-com-720x1280desktop-625937.png",
+            src: "/screenshot-720x1280.png",
             sizes: "720x1280",
             type: "image/png",
           },
@@ -51,33 +51,6 @@ export default defineConfig({
       },
       devOptions: {
         enabled: true,
-        type: "module",
-      },
-      workbox: {
-        runtimeCaching: [
-          {
-            urlPattern: /^https:\/\/fonts\.(?:googleapis|gstatic)\.com\/.*/i,
-            handler: "CacheFirst",
-            options: {
-              cacheName: "google-fonts",
-              expiration: {
-                maxEntries: 10,
-                maxAgeSeconds: 60 * 60 * 24 * 365, // 1 year
-              },
-            },
-          },
-          {
-            urlPattern: /^https:\/\/api\.yourdomain\.com\/.*/i,
-            handler: "NetworkFirst",
-            options: {
-              cacheName: "api-cache",
-              expiration: {
-                maxEntries: 50,
-                maxAgeSeconds: 60 * 60 * 24 * 7, // 7 days
-              },
-            },
-          },
-        ],
       },
     }),
   ],
