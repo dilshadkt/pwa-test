@@ -14,11 +14,28 @@ const PWAInstallPrompt = () => {
 
     window.addEventListener("beforeinstallprompt", handler);
 
+    // Detect if PWA is already installed (for iOS & Android)
+    if (
+      window.matchMedia("(display-mode: standalone)").matches ||
+      window.navigator.standalone
+    ) {
+      setShowInstallButton(false);
+    }
+
     return () => {
       window.removeEventListener("beforeinstallprompt", handler);
     };
   }, []);
 
+  const isIOS = () => {
+    return /iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase());
+  };
+
+  useEffect(() => {
+    if (isIOS() && !window.navigator.standalone) {
+      setShowInstallButton(true); // Show install message for iOS users
+    }
+  }, []);
   const handleInstallClick = () => {
     if (deferredPrompt) {
       deferredPrompt.prompt();
@@ -46,6 +63,12 @@ const PWAInstallPrompt = () => {
            bg-blue-500 text-white px-4 py-2 rounded-lg shadow-lg"
         >
           <button onClick={handleInstallClick}>Install App</button>
+          {isIOS() && showInstallButton && (
+            <div className="ios-install-message">
+              Tap <strong>Share</strong> → <strong>Add to Home Screen</strong>{" "}
+              to install the app.
+            </div>
+          )}
         </motion.div>
       )}
     </AnimatePresence>
