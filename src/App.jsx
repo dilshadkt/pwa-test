@@ -4,7 +4,7 @@ import PWAInstallPrompt from "./PWAInstallPrompt";
 function App() {
   return (
     <>
-      <h1>Heoo worlgasd</h1>
+      <h1>This is Helo World updated</h1>
       <PWAInstallPrompt />
     </>
   );
