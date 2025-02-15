@@ -8,6 +8,9 @@ const updateSW = registerSW({
   onOfflineReady() {},
 });
 
+window.addEventListener("beforeunload", () => {
+  localStorage.setItem("lastVisitedPage", window.location.pathname);
+});
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <App />
